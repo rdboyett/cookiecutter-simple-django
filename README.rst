@@ -1,4 +1,4 @@
-cookiecutter-simple-bootstrap-django
+cookiecutter-simple-django-bootstrap
 ==========================
 
 A cookiecutter_ template for Django.
@@ -64,7 +64,7 @@ Create the database ``redditclone`` and then set up your project::
     $ cd redditclone/
     $ ls
     $ pip install -r requirements/local.txt
-    $ python ./manage.py syncdb
+    $ python ./manage.py makemigrations
     $ python ./manage.py migrate
     $ python ./manage.py runserver
 
@@ -79,12 +79,7 @@ Create a GitHub repo and push it there::
     $ git remote add origin git@github.com:marcofucci/redditclone.git
     $ git push -u origin master
 
-**Note**: The ``requirements`` files don't define any package versions because it makes
-more sense for you to use the latest ones when you set up your
-project. After that point though, you really want to take note of the specific
-versions installed so that they are not going to get updated without you knowing it.
-
-In order to do this, just activate your virtual environment, pip freeze it and
+To add your own requirements, just activate your virtual environment, pip freeze it and
 update your requirements files::
 
     $ activate <your-envs-folder>/redditclone/bin/activate
@@ -116,45 +111,10 @@ run ``python ./manage.py test``.
 
 **Apps**
 
-The ``apps`` folder should contain all your local django apps, this is to keep
-the structure of the project clean.
-
-When it's time to ``python ./manage.py startapp <name>``, just move the generated
-module to ``apps``. If you want to know why this works, just take a look at the line::
-
-    sys.path.insert(0, root('apps'))
-
-in ``settings/base.py``.
-
+When it's time to ``python ./manage.py startapp <name>``.
 
 Done!
 -----
 
 Now, it's time to write the code!!!
 
-
-Not Exactly What You Want?
----------------------------
-
-This is what I want. *It might not be what you want.* Don't worry, you have options:
-
-Fork This
-~~~~~~~~~~
-
-If you have differences in your preferred setup, I encourage you to fork this to create your own version.
-Once you have your fork working, let me know and I'll add it to a '*Similar Cookiecutter Templates*' list here.
-It's up to you whether or not to rename your fork.
-
-If you do rename your fork, I encourage you to submit it to the following places:
-
-* cookiecutter_ so it gets listed in the README as a template.
-* The cookiecutter grid_ on Django Packages.
-
-.. _cookiecutter: https://github.com/audreyr/cookiecutter
-.. _grid: https://www.djangopackages.com/grids/g/cookiecutters/
-
-Or Submit a Pull Request
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-I also accept pull requests on this, if they're small, atomic, and if they make my own project development
-experience better.
