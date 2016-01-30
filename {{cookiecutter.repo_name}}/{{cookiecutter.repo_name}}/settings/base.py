@@ -7,31 +7,54 @@ here = lambda *x: join(abspath(dirname(__file__)), *x)
 PROJECT_ROOT = here("..")
 root = lambda *x: join(abspath(PROJECT_ROOT), *x)
 
-sys.path.insert(0, root('apps'))
+BASE_DIR = dirname(dirname(abspath(__file__)))
 
+
+import environ
+
+env = environ.Env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'CHANGE THIS!!!'
+SECRET_KEY = env("DJANGO_SECRET_KEY", default='!@62*a4-64q0z0e$&b(v5%aqgb8j)$q7%+u5z=8oi2*j^c$$5r')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
 
-INSTALLED_APPS = (
-    'django.contrib.admin',
+# APP CONFIGURATION
+# ------------------------------------------------------------------------------
+DJANGO_APPS = (
+    # Default Django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
+
+    # Useful template tags:
+    # 'django.contrib.humanize',
+
+    # Admin
+    'django.contrib.admin',
+)
+THIRD_PARTY_APPS = (
+    'crispy_forms',  # Form layouts
+    'allauth',  # registration
+    'allauth.account',  # registration
+    'django_extensions',
 )
 
-PROJECT_APPS = ()
+# Apps specific for this project go here.
+LOCAL_APPS = (
+    '{{cookiecutter.repo_name}}.users',
+)
 
-INSTALLED_APPS += PROJECT_APPS
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,12 +76,8 @@ WSGI_APPLICATION = '{{cookiecutter.repo_name}}.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '{{cookiecutter.repo_name}}',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -76,18 +95,21 @@ USE_L10N = True
 USE_TZ = True
 
 
+# See: http://django-crispy-forms.readthedocs.org/en/latest/install.html#template-packs
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = root('assets', 'uploads')
+MEDIA_ROOT = root('media')
 MEDIA_URL = '/media/'
 
 # Additional locations of static files
 
 STATICFILES_DIRS = (
-    root('assets'),
+    root('static'),
 )
 
 TEMPLATES = [
@@ -112,6 +134,34 @@ TEMPLATES = [
     }
 ]
 
+
+
+# AUTHENTICATION CONFIGURATION
+# ------------------------------------------------------------------------------
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# Some really nice defaults
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_ADAPTER = '{{cookiecutter.repo_name}}.users.adapter.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = '{{cookiecutter.repo_name}}.users.adapter.SocialAccountAdapter'
+ACCOUNT_ALLOW_REGISTRATION = True
+
+# Custom user app defaults
+# Select the correct user model
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = 'users:redirect'
+LOGIN_URL = 'account_login'
+
+# SLUGLIFIER
+AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
+
+# Location of root django.contrib.admin URL, use {% raw %}{% url 'admin:index' %}{% endraw %}
+ADMIN_URL = r'^admin/'
 
 # .local.py overrides all the common settings.
 try:

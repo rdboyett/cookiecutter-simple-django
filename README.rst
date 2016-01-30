@@ -1,4 +1,4 @@
-cookiecutter-simple-django
+cookiecutter-simple-bootstrap-django
 ==========================
 
 A cookiecutter_ template for Django.
@@ -8,7 +8,7 @@ A cookiecutter_ template for Django.
 Description
 -----------
 
-Lighter version of the Daniel Greenfeld's cookiecutter-django.
+Lighter version of the Daniel Greenfeld's cookiecutter-django with bootstrap added.
 
 It uses the latest stable versions and it only defines a skeleton which can be extended as needed.
 
