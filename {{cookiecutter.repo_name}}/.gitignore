@@ -58,9 +58,6 @@ venv
 {{cookiecutter.repo_name}}/settings/local.py
 {{cookiecutter.repo_name}}/settings/production.py
 
-# collect static output directory
-{{cookiecutter.repo_name}}/assets/
-{{cookiecutter.repo_name}}/static/
 
 .DS_Store
 
