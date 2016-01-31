@@ -20,10 +20,6 @@ urlpatterns = [
         name='redirect'
     ),
 
-    #api urls
-    url(r'^api/$', views.UserListAPIView.as_view(), name='users_list_rest_api'),
-    url(r'^api/(?P<pk>[0-9]+)/$', views.UserDetailAPIView.as_view(), name='users_detail_rest_api'),
-
     # URL pattern for the UserDetailView
     url(
         regex=r'^(?P<username>[\w.@+-]+)/$',
@@ -37,5 +33,4 @@ urlpatterns = [
         view=views.UserUpdateView.as_view(),
         name='update'
     ),
-
 ]

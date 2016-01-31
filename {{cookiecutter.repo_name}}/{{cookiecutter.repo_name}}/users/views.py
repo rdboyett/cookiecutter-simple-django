@@ -5,11 +5,8 @@ from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 from braces.views import LoginRequiredMixin
-from rest_framework.generics import ListAPIView, RetrieveAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import User
-from urlshortener_project.urlshortener.serializers import UserSerializer
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -49,15 +46,3 @@ class UserListView(LoginRequiredMixin, ListView):
     # These next two lines tell the view to index lookups by username
     slug_field = "username"
     slug_url_kwarg = "username"
-
-
-class UserListAPIView(ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-
-
-class UserDetailAPIView(RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
