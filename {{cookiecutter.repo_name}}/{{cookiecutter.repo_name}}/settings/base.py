@@ -181,7 +181,7 @@ LOGIN_URL = 'account_login'
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 
-# Location of root django.contrib.admin URL, use {% url 'admin:index' %}
+# Location of root django.contrib.admin URL
 ADMIN_URL = r'^admin/'
 
 # .local.py overrides all the common settings.
