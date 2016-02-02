@@ -36,3 +36,14 @@
 [hidden][style="display: block;"] {
   display: block !important;
 }
+
+
+/* Crispy forms error coloring */
+.has-error{
+    color: red;
+}
+.has-error input, .has-error textarea, .has-error input:focus, .has-error textarea:focus  {
+  background-color : #F7C7C7;
+  border-color: red;
+  color: red;
+}
