@@ -1,5 +1,4 @@
 {
-    "dummy":"dummy",
     "project_name": "project_name",
     "repo_name": "{{ cookiecutter.project_name|replace(' ', '_') }}",
     "author_name": "Your Name",
