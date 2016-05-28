@@ -67,3 +67,7 @@ node_modules/
 # bower packages
 {{cookiecutter.repo_name}}/assets-src/vendor/
 .sass-cache/
+
+
+.idea
+_build
