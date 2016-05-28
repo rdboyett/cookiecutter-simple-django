@@ -5,5 +5,5 @@
     "author_name": "Your Name",
     "email": "Your email",
     "description": "A short description of the project.",
-    "year": "{% now 'utc', '%Y' %}",
+    "year": "{% now 'utc', '%Y' %}"
 }
