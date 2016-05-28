@@ -69,5 +69,5 @@ node_modules/
 .sass-cache/
 
 
-.idea
+.idea/*
 _build
