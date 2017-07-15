@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'allauth.socialaccount.providers.google',
     'django_extensions',
 )
 
@@ -194,3 +195,15 @@ except ImportError:
 # importing test settings file if necessary
 if len(sys.argv) > 1 and 'test' in sys.argv[1]:
     from .testing import *
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
